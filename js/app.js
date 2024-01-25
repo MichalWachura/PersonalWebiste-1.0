@@ -39,7 +39,39 @@ class Project{
         this.active = true;
         animating = false;
 
-        for (let i=0; projectsArray.length;i++)
+        for (let i=0; i<projectsArray.length ;i++){
+            if(projectsArray[i].idx !== this.idx){
+                projectsArray[i].gridItem.style.opacity = 0;
+            }
+        }
+
+        let {left,top,width,height} = this.gridItem.getBoundingClientRect();
+        let x =(window.innerWidth / 2 - (left + (width / 2)));
+        let y = (window.innerHeight / 2) - (top + (height / 2)) - (window.innerHeight * .1)
+
+        if(this.active){
+            this.gridItem.style.transform = `translate3d(${x}px,${y}px ,0) scale(4)`
+            // Set content
+
+            contentHeader.innerHTML = '';
+            contentText.innerHTML = '';
+            contentImage.src=this.image;
+            let header = document.createElement('h1');
+            header.textContent = this.title
+            contentHeader.appendChild(header);
+            for( let i = 0 ; i<this.content.length; i++){
+                let text = document.createElement('p');
+                text.textContent = this.content[i];
+                contentText.appendChild(text)
+            }
+            setTimeout(()=>{
+                content.classList.add('active')
+            })
+        }
+     }
+
+     deactivate(){
+        this
      }
 }
 
