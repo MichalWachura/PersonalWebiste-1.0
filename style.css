@@ -86,7 +86,7 @@ img{
 .content{
     position: absolute;
     width: 100%;
-    
+    bottom: 5rem;
     opacity: 0;
     min-width: 100vh;
     pointer-events: none;
@@ -100,6 +100,7 @@ img{
     pointer-events: all;
 }
 .content__main__img{
+    position: relative;
    width: 100%;
    height: 80vh;
   object-fit: cover;
@@ -111,7 +112,7 @@ img{
     width: 90%;
     left: 50%;
     transform: translateX(-50%);
-    border: 1px solid green;
+    
 }
 .content__text{
     margin: 1rem 0 ;
