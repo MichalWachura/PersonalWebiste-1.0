@@ -1,6 +1,6 @@
 let projects = [
     {
-        image:'./img/1_Render_Point.jpg',
+        image:'https://images.unsplash.com/photo-1706038513444-e08c8633c01e?q=80&w=2129&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         title:'Uplow',
         content:['This is some content.','Lorem impsum solor janena oleja mateja pitreja','This is some content.']
     },
