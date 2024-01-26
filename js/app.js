@@ -39,7 +39,7 @@ class Project{
         this.active = true;
         animating = false;
 
-        for (let i=0; i<projectsArray.length ;i++){
+        for (let i = 0; i <projectsArray.length ; i++){
             if(projectsArray[i].idx !== this.idx){
                 projectsArray[i].gridItem.style.opacity = 0;
             }
@@ -51,6 +51,8 @@ class Project{
 
         if(this.active){
             this.gridItem.style.transform = `translate3d(${x}px,${y}px ,0) scale(4)`
+
+
             // Set content
 
             contentHeader.innerHTML = '';
@@ -71,8 +73,13 @@ class Project{
      }
 
      deactivate(){
-        this
+        this.activate = false ;
+        this.gridItem.style.transform = `translate3d(0, 0 ,0) scale(1)`;
+        this.gridItem.style.opacity = 1;
      }
+
+     
+
 }
 
 projects.forEach((project,idx)=>{
@@ -80,4 +87,41 @@ projects.forEach((project,idx)=>{
     projectsArray.push(newProject);
 })
 
+
+contentClose.addEventListener('click',()=>{
+    content.classList.remove('active')
+    document.body.scrollTop = document.documentElement.scrollTop =  0;
+    setTimeout(()=>{
+    animating = true;
+    },500)
+    for(let i=0 ; projectsArray.length; i++){
+        projectsArray[i].deactivate()
+    }
+})
+
 console.log(projectsArray)
+
+let mouseCoordinates = {
+    x : 0,
+    y : 0,
+    targetX : 0,
+    targetY : 0,
+}
+
+window.addEventListener('mousemove',(e)=>{
+    mouseCoordinates.targetX = (e.clientX - (window.innerWidth / 2));
+    mouseCoordinates.targetY = (e.clientY - (window.innerHeight / 2));
+})
+
+
+function animate (){
+    if(animating){
+        mouseCoordinates.x = lerp(mouseCoordinates.x,mouseCoordinates.targetX,.075)
+        mouseCoordinates.y = lerp(mouseCoordinates.y,mouseCoordinates.targetY,.075)
+
+        let {x,y} = mouseCoordinates;
+        container.style.transform = `translate3d(${-x}px,${-y}px,0)`
+    }
+    window.requestAnimationFrame(animate)
+}
+ animate()
